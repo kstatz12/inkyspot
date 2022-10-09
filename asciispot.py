@@ -13,7 +13,7 @@ def curses_main(w):
         text = __process_image(image)
         w.addstr(text)
         w.refresh()
-        time.sleep(30000)
+        time.sleep(300)
 
 
 def __get_image():
