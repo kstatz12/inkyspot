@@ -1,8 +1,20 @@
 import sys
 import requests
 import json
+import curses
+import time
 from io import BytesIO
 from PIL import Image
+
+
+def curses_main(w):
+    while True:
+        image = __get_image()
+        text = __process_image(image)
+        w.addstr(text)
+        w.refresh()
+        time.sleep(30000)
+
 
 def __get_image():
     r = requests.get("http://localhost:8080/current_playing")
@@ -34,10 +46,12 @@ def __process_image(image):
     new_pixels_count = len(new_pixels)
 
     ascii_image = [new_pixels[index:index + new_width] for index in range(0, new_pixels_count, new_width)]
-    ascii_image = "\n".join(ascii_image)
-    print(ascii_image)
+    return "\n".join(ascii_image)
 
 
 img = __get_image()
 
 __process_image(img)
+
+
+curses.wrapper(curses_main)
