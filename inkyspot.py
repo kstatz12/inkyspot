@@ -15,8 +15,7 @@ def __get_image():
 
 
 def __process_image(img):
-    img.resize((600, 448))
-    return img
+    return img.resize((600, 448))
 
 
 def __set_image(image):
