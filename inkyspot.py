@@ -14,9 +14,14 @@ def __get_image():
     return Image.open(BytesIO(res.content))
 
 
+def __process_image(img):
+    img.resize((600, 448))
+    return img
+
+
 def __set_image(image):
     image = __get_image()
-    display.set_image(image)
+    display.set_image(__process_image(image))
     display.show()
 
 
