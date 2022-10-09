@@ -38,8 +38,7 @@ def __process_image(image):
 
     pixels = image.getdata()
 
-
-    chars = ["B","S","#","&","@","$","%","*","!",":","."]
+    chars = ["B", "S", "#", "&", "@", "$", "%", "*", "!", ":", "."]
     new_pixels = [chars[pixel//25] for pixel in pixels]
     new_pixels = ''.join(new_pixels)
 
