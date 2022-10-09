@@ -4,9 +4,10 @@ from bottle import route, run, request
 
 SCOPE = "user-read-currently-playing"
 
-sp_auth = oath2.SpotifyOAuth(scope=SCOPE)
+sp_auth = oauth2.SpotifyOAuth(scope=SCOPE)
 
-@route('/login')
+
+@route('/')
 def login():
     access_token = __auth_guard()
     if access_token:
@@ -14,14 +15,15 @@ def login():
     else:
         return __login_form()
 
+
 @route('current_playing')
-def current_playing()
+def current_playing():
     access_token = __auth_guard()
     if access_token:
-       sp = spotipy.Spotify(access_token)
-       return sp.current_playback()
+        sp = spotipy.Spotify(access_token)
+        return sp.current_playback()
     else:
-        return __login_form()
+        return "oops"
 
 
 def __auth_guard():
@@ -31,9 +33,9 @@ def __auth_guard():
         access_token = token_info['access_token']
     else:
         url = request.url
-        code = sp_auth.get_access_token(url)
+        code = sp_auth.parse_response_code(url)
         if code != url:
-            token_info = sp_auth.get_access_token()
+            token_info = sp_auth.get_access_token(code)
             access_token = token_info['access_token']
     return access_token
 
@@ -43,4 +45,4 @@ def __login_form():
     return "<a href='"+auth_url+"'>Login</a>"
 
 
-run(host='')
+run(host='', port=8080)

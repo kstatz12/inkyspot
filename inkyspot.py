@@ -1,23 +1,26 @@
-import spotipy
-from inky.auto import auto
-from spotipy.oauth2 import SpotifyOAuth
+from inky import Inky7Colour as Inky
 from PIL import Image
 import requests
 from io import BytesIO
+import time
 
 
-def __get_image(sp):
-    r = sp.currently_playing()
+def __get_image():
+    r = requests.get("localhost:8080/current_playing")
     url = r['item']['album']['images'][0]['url']
     print(url)
     res = requests.get(url)
     return Image.open(BytesIO(res.content))
 
 
-display = auto()
-scope = "user-read-currently-playing"
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+def __set_image(image):
+    image = __get_image()
+    display.set_image(image)
+    display.show()
 
-image = __get_image(sp)
-display.set_image(image)
-display.show()
+
+display = Inky()
+while True:
+    image = __get_image()
+    __set_image(image)
+    time.sleep(30000)
