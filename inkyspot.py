@@ -3,12 +3,13 @@ from PIL import Image
 import requests
 from io import BytesIO
 import time
+import json
 
 
 def __get_image():
     r = requests.get("http://localhost:8080/current_playing")
-    print(r.content)
-    url = r.content['item']['album']['images'][0]['url']
+    data = json.loads(r.text)
+    url = data['item']['album']['images'][0]['url']
     res = requests.get(url)
     return Image.open(BytesIO(res.content))
 
