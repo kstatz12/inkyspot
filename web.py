@@ -42,7 +42,7 @@ def __auth_guard():
         print(f"Found Access Token {access_token}")
         return access_token
     else:
-        return "unauthed"
+        return None
 
 
 def __login_form():
