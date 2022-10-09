@@ -6,7 +6,7 @@ RUN pip3 install bottle
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY . /app
+COPY web.py /app
 
 EXPOSE 8080
 
