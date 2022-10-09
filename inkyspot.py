@@ -7,8 +7,7 @@ import time
 
 def __get_image():
     r = requests.get("http://localhost:8080/current_playing")
-    url = r['item']['album']['images'][0]['url']
-    print(url)
+    url = r.content['item']['album']['images'][0]['url']
     res = requests.get(url)
     return Image.open(BytesIO(res.content))
 
