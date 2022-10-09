@@ -11,9 +11,10 @@ def curses_main(w):
     while True:
         image = __get_image()
         text = __process_image(image)
+        w.erase()
         w.addstr(text)
         w.refresh()
-        time.sleep(300)
+        time.sleep(15)
 
 
 def __get_image():
