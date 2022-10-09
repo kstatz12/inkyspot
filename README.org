@@ -1,0 +1,24 @@
+#+title: InkySpot
+#+author: kstatz12
+* InkySpot: Spotify Display Scripts
+** Project Requirements
+You will need Python 3.x installed with the following packages
+
+- spotipy
+- bottle
+- curses
+- requests
+- PIL (pillow)
+
+You will also need docker installed, a spotify account and a spotify application
+[[https://developer.spotify.com/][developer documentation]]
+** Configuration
+The only requred configuration is to fill out the .env.template file with your spotify application's information (Client Secret, Client Id and Callback URL)
+
+The callback URL for running this on a local machine should be `http://localhost:8080` and this needs to match in your spotify settings.
+** Running
+To get started run `./start.sh` to spin up the spotify proxy. this will handle auth to spotify and proxy requests to spotify using your user's auth token
+
+Navigate to `http://localhost:8080` and click `Login`. this will redirect you to spotify to login, once you log in it will redirect you back and it should say "ok". You can close your web browser.
+
+once you have done that, run `python3 asciispot.py` in your terminal and it should launch showing the album art from the song that is currently playing. If no song is playing it will crash.
