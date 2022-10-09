@@ -16,7 +16,7 @@ def login():
         return __login_form()
 
 
-@route('current_playing')
+@route('/current_playing')
 def current_playing():
     access_token = __auth_guard()
     if access_token:
@@ -37,7 +37,13 @@ def __auth_guard():
         if code != url:
             token_info = sp_auth.get_access_token(code)
             access_token = token_info['access_token']
-    return access_token
+
+    if access_token:
+        print(f"Found Access Token {access_token}");
+        return access_token
+
+    else:
+        return "unauthed"
 
 
 def __login_form():
