@@ -1,4 +1,4 @@
-from inky impor Inky7Colour as Inky
+from inky import Inky7Colour as Inky
 
 display = Inky()
 
