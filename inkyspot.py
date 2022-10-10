@@ -36,8 +36,8 @@ def __set_image(image):
         display.show()
 
 
-if sys.arg[1] is not None:
-    baseUrl = sys.arg[1]
+if sys.argv[1] is not None:
+    baseUrl = sys.argv[1]
 
 display = auto(ask_user=True, verbose=True)
 while True:
