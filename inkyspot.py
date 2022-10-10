@@ -8,6 +8,7 @@ import json
 import sys
 
 currentImageUrl = ""
+currentImage = None
 baseUrl = "http://localhost:8080"
 
 
@@ -19,8 +20,14 @@ def __get_image():
         return None, None
 
     url = data['item']['album']['images'][0]['url']
-    res = requests.get(url)
-    return url, Image.open(BytesIO(res.content))
+    global currentImageUrl
+    global currentImage
+
+    if url != currentImageUrl:
+        res = requests.get(url)
+        return url, Image.open(BytesIO(res.content))
+    else:
+        return currentImage()
 
 
 def __process_image(img):
@@ -29,9 +36,11 @@ def __process_image(img):
 
 def __set_image(image):
     global currentImageUrl
+    global currentImage
     url, image = __get_image()
     if currentImageUrl != url:
         currentImageUrl = url
+        currentImage = image
         display.set_image(__process_image(image))
         display.show()
 
