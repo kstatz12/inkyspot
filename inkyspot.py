@@ -24,8 +24,10 @@ def __get_image():
 
     url = data['item']['album']['images'][0]['url']
         if url != currentImageUrl:
-        res = requests.get(url)
-        return url, Image.open(BytesIO(res.content))
+            res = requests.get(url)
+            return url, Image.open(BytesIO(res.content))
+        else:
+            return currentImageUrl, currentImage
     else:
         return currentImage()
 
