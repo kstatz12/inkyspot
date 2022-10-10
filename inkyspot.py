@@ -13,6 +13,9 @@ baseUrl = "http://localhost:8080"
 
 
 def __get_image():
+    global currentImageUrl
+    global currentImage
+
     r = requests.get(baseUrl + "/current_playing")
     data = json.loads(r.text)
 
@@ -20,10 +23,7 @@ def __get_image():
         return currentImageUrl, currentImage
 
     url = data['item']['album']['images'][0]['url']
-    global currentImageUrl
-    global currentImage
-
-    if url != currentImageUrl:
+        if url != currentImageUrl:
         res = requests.get(url)
         return url, Image.open(BytesIO(res.content))
     else:
