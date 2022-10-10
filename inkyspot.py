@@ -1,4 +1,4 @@
-from inky import Inky7Colour as Inky
+from inky.auto import auto
 from PIL import Image
 import requests
 from io import BytesIO
@@ -24,7 +24,7 @@ def __set_image(image):
     display.show()
 
 
-display = Inky()
+display = auto(ask_user=True, verbose=True,t)
 while True:
     image = __get_image()
     __set_image(image)
