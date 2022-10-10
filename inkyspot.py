@@ -5,12 +5,14 @@ import requests
 from io import BytesIO
 import time
 import json
+import sys
 
 currentImageUrl = ""
+baseUrl = "http://localhost:8080"
 
 
 def __get_image():
-    r = requests.get("http://localhost:8080/current_playing")
+    r = requests.get(baseUrl + "/current_playing")
     data = json.loads(r.text)
 
     if data is None:
@@ -33,6 +35,9 @@ def __set_image(image):
         display.set_image(__process_image(image))
         display.show()
 
+
+if sys.arg[1] is not None:
+    baseUrl = sys.arg[1]
 
 display = auto(ask_user=True, verbose=True)
 while True:
