@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from inky.auto import auto
 from PIL import Image
 import requests
@@ -24,7 +25,7 @@ def __set_image(image):
     display.show()
 
 
-display = auto(ask_user=True, verbose=True,t)
+display = auto(ask_user=True, verbose=True)
 while True:
     image = __get_image()
     __set_image(image)
