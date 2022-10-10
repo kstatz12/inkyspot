@@ -29,4 +29,4 @@ display = auto(ask_user=True, verbose=True)
 while True:
     image = __get_image()
     __set_image(image)
-    time.sleep(30000)
+    time.sleep(30)
