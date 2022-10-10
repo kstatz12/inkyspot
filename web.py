@@ -21,9 +21,7 @@ def current_playing():
     access_token = __auth_guard()
     if access_token:
         sp = spotipy.Spotify(access_token)
-        r = sp.currently_playing()
-        print(r)
-        return r
+        return sp.currently_playing()
     else:
         return "oops"
 

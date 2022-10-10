@@ -6,13 +6,18 @@ from io import BytesIO
 import time
 import json
 
+currentImageUrl = ""
 
 def __get_image():
     r = requests.get("http://localhost:8080/current_playing")
     data = json.loads(r.text)
+
+    if data is None:
+        return None, None
+
     url = data['item']['album']['images'][0]['url']
     res = requests.get(url)
-    return Image.open(BytesIO(res.content))
+    return url, Image.open(BytesIO(res.content))
 
 
 def __process_image(img):
@@ -20,9 +25,11 @@ def __process_image(img):
 
 
 def __set_image(image):
-    image = __get_image()
-    display.set_image(__process_image(image))
-    display.show()
+    url, image = __get_image()
+    if currentImageUrl != url:
+        let currentImageUrl = url
+        display.set_image(__process_image(image))
+        display.show()
 
 
 display = auto(ask_user=True, verbose=True)
