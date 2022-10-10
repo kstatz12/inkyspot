@@ -17,7 +17,7 @@ def __get_image():
     data = json.loads(r.text)
 
     if data is None:
-        return None, None
+        return currentImageUrl, currentImage
 
     url = data['item']['album']['images'][0]['url']
     global currentImageUrl
