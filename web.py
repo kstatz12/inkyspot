@@ -39,7 +39,6 @@ def __auth_guard():
             access_token = token_info['access_token']
 
     if access_token:
-        print(f"Found Access Token {access_token}")
         return access_token
     else:
         return None
