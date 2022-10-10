@@ -26,9 +26,9 @@ def __process_image(img):
 
 
 def __set_image(image):
+    global currentImageUrl
     url, image = __get_image()
     if currentImageUrl != url:
-        global currentImageUrl
         currentImageUrl = url
         display.set_image(__process_image(image))
         display.show()
