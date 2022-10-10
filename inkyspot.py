@@ -8,6 +8,7 @@ import json
 
 currentImageUrl = ""
 
+
 def __get_image():
     r = requests.get("http://localhost:8080/current_playing")
     data = json.loads(r.text)
@@ -27,7 +28,8 @@ def __process_image(img):
 def __set_image(image):
     url, image = __get_image()
     if currentImageUrl != url:
-        let currentImageUrl = url
+        global currentImageUrl
+        currentImageUrl = url
         display.set_image(__process_image(image))
         display.show()
 
