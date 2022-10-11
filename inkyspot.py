@@ -17,12 +17,13 @@ def __get_image():
     global currentImage
 
     r = requests.get(baseUrl + "/current_playing")
-    data = json.loads(r.text)
 
-    if data is None:
+    if r.text is None:
         return currentImageUrl, currentImage
 
-    url = data['item']['album']['images'][0]['url']
+    data = json.loads(r.text)
+
+        url = data['item']['album']['images'][0]['url']
     if url != currentImageUrl:
         res = requests.get(url)
         return url, Image.open(BytesIO(res.content))
