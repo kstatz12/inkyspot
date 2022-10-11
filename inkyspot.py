@@ -22,8 +22,7 @@ def __get_image():
         return currentImageUrl, currentImage
 
     data = json.loads(r.text)
-
-        url = data['item']['album']['images'][0]['url']
+    url = data['item']['album']['images'][0]['url']
     if url != currentImageUrl:
         res = requests.get(url)
         return url, Image.open(BytesIO(res.content))
